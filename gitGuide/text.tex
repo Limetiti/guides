@@ -81,7 +81,7 @@ You've successfully authenticated, but GitHub does not provide shell access.
 			\par从本地新建一个仓库的操作是：
 				\begin{quote}
 					\begin{lstlisting}
-$ cd \c\your\repo\path
+$ cd /c/your/repo/path
 $ git init name_of_repo
 					\end{lstlisting}
 				\end{quote}
@@ -100,10 +100,10 @@ $ git add .
 			\par 从现有的仓库克隆的方法为：
 			\begin{quote}
 				\begin{lstlisting}
-$ git clone git://github.com/....../*.git
+$ git clone <url>
 				\end{lstlisting}
 			\end{quote}
-			\par 现有的仓库的克隆地址可以在项目的Github页面上找到。这会在当前目录下创建一个名为“*”的目录，其中包含一个 .git 的目录文件，用于保存下载下来的所有版本记录，然后从中取出最新版本的文件拷贝。在仓库的目录下键入{\tt git status}命令，可以查看已跟踪和未跟踪的文件列表。
+			\par 现有的仓库的克隆地址可以在Github上的项目主页上找到，通常这些url有https（https://github.com/username/projectname.git）和ssh（git@github.com:username/projectname.git）两种形式。这会在当前目录下创建一个名为“*”的目录，其中包含一个 .git 的目录文件，用于保存下载下来的所有版本记录，然后从中取出最新版本的文件拷贝。在仓库的目录下键入{\tt git status}命令，可以查看已跟踪和未跟踪的文件列表。
 			\par{\bf\textcolor{red}{有多个项目时，在操作前必须用{\tt cd}命令进入需要操作的项目的目录。}}
 		\subsection{提交与推送（commit and push）} % (fold)
 		\label{sub:提交与推送_commit_and_push_}
@@ -132,7 +132,7 @@ git commit -a -m 'commit message'
 			\par 如果是本地的新建仓库，从来没有推送到服务器过，则应该使用如下命令
 			\begin{quote}
 				\begin{lstlisting}
-$ git remote add origin git@github.com:....../*.git
+$ git remote add origin <url>
 $ git push origin master
 				\end{lstlisting}
 			\end{quote}
@@ -204,7 +204,16 @@ $ git branch -d a
 				\end{lstlisting}
 			\end{quote}
 			分割线的上面和下面为冲突行在a分支和欲合并的b分支中的内容，手动删除要抛弃的内容之后，运行一次{\tt git add}来标记问题已解决。然后可以运行一次{\tt git status}来确认一下。解决冲突问题之后，就可以提交commit了。
-
+			\par 如果需要pull一个远程的分支到本地，可以使用如下方法：
+			\begin{quote}
+				\begin{lstlisting}
+$ git branch <new_branch_name>
+$ git branch --set-upstream-to=origin/<branch_name> <new_branch_name>
+$ git checkout <new_branch_name>
+				\end{lstlisting}
+			\end{quote}
+			即：先在本地新建一个分支，再讲远程分支关联到该本地分支。{\tt branch\_name}即为远程分支的名称。
+			
 			~\\\noindent\textbf{参考阅读}：\url{http://www.open-open.com/lib/view/open1328069889514.html}
 		% subsection 分支 (end)
 		\subsection{Fork 与克隆（clone）} % (fold)
@@ -213,7 +222,7 @@ $ git branch -d a
 			\par fork的方法为，在想要fork的项目页面点击fork按钮。fork成功之后，使用
 			\begin{quote}
 				\begin{lstlisting}
-$ git clone git@github.com:.../*/git
+$ git clone <url>
 				\end{lstlisting}
 			\end{quote}
 			命令将项目克隆到本地，就可以开始进行开发了。
